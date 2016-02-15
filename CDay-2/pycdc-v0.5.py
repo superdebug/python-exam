@@ -25,13 +25,6 @@ class PyCDC(cmd.Cmd):
 		if filename=="":filename = raw_input("输入cdc文件名::")
 		print "扫描光盘内容到: '%s' " %  filename
 		cdWalker(self.CDROM,self.CDDIR+filename)	
-
-
-
-
-
-
-
 	
 	def help_dir(self):
 		print "指定保存/搜索目录"
@@ -39,12 +32,8 @@ class PyCDC(cmd.Cmd):
 		if pathname == "": pathname = raw_input("输入指定保存/搜索目录:")
 
 
-
-
-
 if __name__=='__main__':
 	cdc=PyCDC()
 	cdc.cmdloop()
 	CDROM='/exam'
 	cdWalker(CDROM,'cdctools.cdc')
-
