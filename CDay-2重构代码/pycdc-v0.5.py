@@ -22,7 +22,8 @@ class PyCDC(cmd.Cmd):
 	def help_walk(self):
 		print "扫描光盘内容 walk cd and export into *.cdc"
 	def do_walk(self,filename):
-		if filename=="":filename = raw_input("输入cdc文件名::")
+		if filename=="":
+			filename = raw_input("输入cdc文件名::")
 		print "扫描光盘内容到: '%s' " %  filename
 		cdWalker(self.CDROM,self.CDDIR+filename)	
 	

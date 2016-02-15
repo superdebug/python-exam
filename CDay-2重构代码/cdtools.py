@@ -7,5 +7,5 @@ def cdWalker(cdrom,cdcfile):
 	open(cdcfile,'w').write(export)
 if __name__=='__main__':   #调用模块的时候使用
 	CDROM='/exam'
-	cdWalker(CDROM,'cdtools.cdc')
+	cdWalker(CDROM,'/exam/cdc/cdtools.cdc')
 
