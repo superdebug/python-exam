@@ -2,7 +2,7 @@
 import os
 def cdWalker(cdrom,cdcfile):
 	export = ""
-	for root,dirs,files in os.walker(cdrom):
+	for root,dirs,files in os.walk(cdrom):
 		export+="\n %s;%s;%s" % (root,dirs,files)
 	open(cdcfile,'w').write(export)
 if __name__=='__main__':   #调用模块的时候使用
