@@ -31,6 +31,19 @@ class PyCDC(cmd.Cmd):
 		print "指定保存/搜索目录"
 	def do_dir(self,pathname):
 		if pathname == "": pathname = raw_input("输入指定保存/搜索目录:")
+        
+        def do_cdcGrep(cdcpath,keyword):
+                filelist = os.listdir(cdcpath)
+                for cdc in filelist:
+                    if ".cdc" in cdc:
+                        cdcfile = open(cdcpath+cdc)
+                        for line in cdcfile.readlines():
+                            if keyword in line:
+                                print line
+
+
+
+
 
 
 if __name__=='__main__':
