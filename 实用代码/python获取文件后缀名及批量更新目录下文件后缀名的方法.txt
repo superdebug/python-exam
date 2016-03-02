@@ -1,0 +1,67 @@
+这篇文章主要介绍了python获取文件后缀名及批量更新目录下文件后缀名的方法,实例展示了Python针对文件后缀名的遍历查找及修改等常用操作技巧,并对其中的关键知识点进行了分析与总结,需要的朋友可以参考下
+本文实例讲述了python获取文件后缀名及批量更新目录下文件后缀名的方法。分享给大家供大家参考。具体实现方法如下：
+
+1. 获取文件后缀名：
+
+
+复制代码 代码如下:#!/usr/bin/python
+import os
+dict = {}
+for d, fd, fl in os.walk('/home/ahda/Program/'):
+        for f in fl:
+                sufix = os.path.splitext(f)[1][1:]
+                if dict.has_key(sufix):
+                        dict[sufix] += 1
+                else:
+                        dict[sufix] = 1
+for item in dict.items():
+        print "%s : %s" % item
+这里的关键是os.path.splitext()
+如abc/ef.g.h ，这里获取到的是h
+
+2. python查找遍历指定文件路径下指定后缀名的文件实例：
+
+
+复制代码 代码如下:import os
+import sys
+import os.path
+for dirpath, dirnames, filenames in os.walk(startdir):
+        for filename in filenames:
+            if os.path.splitext(filename)[1] == '.txt':
+               filepath = os.path.join(dirpath, filename)
+               #print("file:" + filepath)
+               input_file = open(filepath)
+               text = input_file.read()
+               input_file.close()
+               
+               output_file = open( filepath, 'w')
+               output_file.write(text)
+               output_file.close()
+3. 批量重命名目录中的文件后缀实例：
+复制代码 代码如下:import os
+def swap_extensions(dir, before, after):
+    if before[:1] != '.': #如果参数中的后缀名没有'.'则加上
+        before = '.' + before
+    thelen = -len(before)
+    if after[:1] != '.':
+        after = '.' + after
+    for path, subdir, files in os.walk(dir):
+        for oldfile in files:
+            if oldfile[thelen:] == before:
+                oldfile = os.path.join(path, oldfile)
+                newfile = oldfile[:thelen] + after
+                os.rename(oldfile, newfile)
+                print oldfile +' changed to ' + newfile
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) != 4:
+        print 'Usage:swap_extension.py rootdir before after'
+        sys.exit(1)
+    swap_extensions(sys.argv[1], sys.argv[2], sys.argv[3])
+例子:将e:/py/test目录下.php结尾的文件重命名为.py
+ 
+E:py>python_cook e:/py/test .php .py
+e:/py/testtest.php changed to e:/py/testtest.py
+e:/py/test1.php changed to e:/py/test1.py
+e:/py/test2.php changed to e:/py/test2.py
+

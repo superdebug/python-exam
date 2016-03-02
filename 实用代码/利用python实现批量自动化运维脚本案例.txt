@@ -1,0 +1,52 @@
+ 本文为通过密码或密钥实现python批量自动化运维脚本案例分享
+#!/usr/bin/env python
+# this script comes from beijing oldboy trainning.
+# e_mail:70271111@qq.com
+# function: remote multi exec cmd by ssh.
+# version:1.1
+################################################
+# oldboy trainning info.
+# QQ 80042789 70271111
+# site:http://www.etiantian.org
+# blog:http://oldboy.blog.51cto.com
+# oldboy trainning QQ group: 208160987 45039636
+################################################
+import paramiko
+import socket
+import sys,os
+host = sys.argv[1]
+user = sys.argv[2]
+port = int(sys.argv[3])
+auth_method = sys.argv[4]
+if auth_method == 'PASSWORD':
+    password = sys.argv[5]
+    cmd = sys.argv[6]
+else:
+    cmd = sys.argv[5]
+    s = paramiko.SSHClient()
+    s.load_system_host_keys()
+    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#pkey_file = '/home/alex/.ssh/id_rsa'
+#key = paramiko.RSAKey.from_private_key_file(pkey_file)
+#s.connect(host,port,username,pkey=key,timeout=5)
+try:
+if auth_method == 'SSH_KEY':
+    pkey_file = '/home/alex/.ssh/id_rsa'
+    key = paramiko.RSAKey.from_private_key_file(pkey_file)
+    s.connect(host,port,user,pkey=key,timeout=5)
+elif auth_method == 'PASSWORD':
+    s.connect(host,port,user,password,timeout=5)
+    stdin,stdout,stderr = s.exec_command(cmd)
+    cmd_result = stdout.read(),stderr.read()
+print "--------Result from? %s -------" % host
+for line in cmd_result:
+    print line,
+s.close()
+except paramiko.AuthenticationException:
+    print "\033[31;1m%s Authentication Error!\033[0m" % host
+except socket.error:
+    print "\033[31;1m%s Connection Refused!\033[0m" % host
+执行命令：
+python batch_ssh.py 10.0.0.8 oldboy 22 SSH_KEY  df
+python batch_ssh.py 10.0.0.9 root   33 PASSWORD 123456 df
+
