@@ -33,7 +33,7 @@ a=input("please input 0 or 1:")
 start_time = time.time()
 start_clock = time.clock()
 
-
+ 
 if a:
     sum_i=0
     for i in range(100000):
