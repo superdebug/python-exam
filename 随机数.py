@@ -5,6 +5,8 @@ charactor='abcdefghijklmnopqrstuvwxyz0123456789'
 len_char = len(charactor)-1
 # generate name
 a=[0]*4
+#print '[0]*4='+str([0]*4)
+#print a[1]
 a[0]=charactor[random.randint(0,len_char)]
 a[1]=charactor[random.randint(0,len_char)]
 a[2]=charactor[random.randint(0,len_char)]
