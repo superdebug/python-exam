@@ -1,5 +1,6 @@
 # coding: utf-8
 import random
+#
 charactor='abcdefghijklmnopqrstuvwxyz0123456789'
 
 len_char = len(charactor)-1
