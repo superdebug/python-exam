@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 #copyRight by heibanke
+#支持中文及utf8
 import codecs
 import re
 #读取cvs文件数据，含中文数据，然后存入字典
@@ -15,19 +16,21 @@ import re
 #    read_list.append(read_tmp)
     
 # f.close()
-
+#打开中文编码的文件
 f=codecs.open('beijing_jt.csv','r','utf-8')
 read_tmp_total=f.readlines()
 f.close()
 
-# get linenum and stations information
+# get linenum and stations informationi
+#读取第2-39行
 s_tmp=''.join(read_tmp_total[1:40])   #read_list
+print s_tmp
 jt_info=s_tmp.split(',')
 
 jt_stations = jt_info[-1].split('\r\n \r\n')
 
-print jt_info[1]
 
+print jt_info[1]
 # convert stations info format
 station_pattern = (r'(?P<number>[0-9]+)\s(?P<name>\D+)')
 
