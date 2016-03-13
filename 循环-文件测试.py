@@ -28,7 +28,7 @@ for x in [1, 2, 3, 4]:
 
 S = u"你在远方"
 T = (u"我", u"在", u"故乡")
-for x in S: print x, 
+for x in S: print '\b'+x, #\b是转义字符，让每个汉字后面跟一个删除键，确保没有空格
 for x in T: print x,
 
 
