@@ -21,3 +21,4 @@ print(s1.keys()&s2.keys()) #在集合中使用与(and)的方式，获取s1和s2�
 #使用map reduce方式操作
 map(dict.keys,[s1,s2,s3])
 print(reduce(lambda a,b : a&b ,map(dict.keys,[s1,s2,s3])))
+print ('=---------------')
